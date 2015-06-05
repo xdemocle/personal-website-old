@@ -1,0 +1,7 @@
+{
+  "name": "xdemocle-github-io",
+  "private": true,
+  "dependencies": {
+    "roboto-fontface": "~0.4.2"
+  }
+}
