@@ -9,12 +9,10 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/icons/enso-apple-touch-icon.png" />
     <link rel="android-touch-icon" href="images/icons/enso-android-touch-icon.png" />
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/roboto-fontface/css/roboto-fontface.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
     <!-- build:css styles/main.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/lato/css/lato.css" />
+    <!-- endbower -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -33,22 +31,42 @@
         </div>
 
         <div class="content-dmmerd">
-          <p>
-            <strong>Rocco Russo</strong>: Front-End Web Developer / HTML / CSS / JavaScript / SPA / Drupal / Theming / CoffeeScript / SASS / LESS / 
-            AngularJS / <a href="https://www.linkedin.com/in/roccorusso" title="Visit my LinkedIn profile">LinkedIn</a> / Templating / Yeoman / cross-browser / Grunt / Gulp /
-            <a href="https://github.com/xdemocle" title="Visit my GitHub profile">GitHub</a> / Client-side / Nginx / PHP / <a href="https://bitbucket.org/xdemocle" title="Visit my Bitbucket profile">BitBucket</a> / Apache / Comanche / Cheyenne / Sitting Bull / Pizza / Pasta / Mafia / 
-            Mandolino / South Italy /  Sir, Do You Have a Moment to Talk About Jesus 
-            Christ? /  I hate seafood / Minimal Style / I hate pizza made abroad, but I 
-            cannot avoid otherwise, I could become extinct / I hate ﬁsh in general / I hate 
-            who hates / Sometime I hate also myself / Slowpoke / if you arrived here, that's 
-            mean you don't have so much to do :P / Bower / GIT / SVN / OOP / AJAX / REST / 
-            I'm Batman / Redis Cache / MongoDB / I played american football in Italy and I 
-            hate who think rugby is better... / I wrote these bullshits at 2am / I have a 
-            motorbike here in Holland, brought from Malta and bought in Sicily... still have
-            to fix it, i'm worried cause I could run away for the bad weather of Holland / 
-            Sort of Single / <span class="years_old">33</span> years old / Electronic / Fuck off / Power Metal /
-            Punk Rock / Blues / <a href="mailto:im@rocco.me?subject=Inquiry from website">Contact me if you want hire me for a job</a> / Whatever.
-          </p>
+          <div class="inner">
+
+            <h3>Rocco Russo <span>Front-End Web Developer</span></h3>
+
+            <p>
+              <a href="https://github.com/xdemocle" title="Visit my GitHub profile">GitHub</a> /
+              <a href="https://www.linkedin.com/in/roccorusso" title="Visit my LinkedIn profile">LinkedIn</a> /
+              <a href="https://bitbucket.org/xdemocle" title="Visit my Bitbucket profile">BitBucket</a> /
+              <a href="https://twitter.com/xdemocle" title="Visit my Twitter profile">Twitter</a> / 
+              <a href="skype:democle?chat" title="Chat with me on Skype" class="skype">Skype</a> / 
+              <a href="https://www.facebook.com/xdemocle" title="Visit my Facebook profile">Facebook</a> / 
+              <a href="https://plus.google.com/+RoccoRusso" title="Visit my Google+ profile">Google+</a>
+            </p>
+
+            <p>
+              HTML / CSS / JavaScript / SPA / Drupal / Theming / CoffeeScript / SASS / LESS / 
+              AngularJS / Templating / PhoneGap / Cordova / Yeoman / cross-browser / Grunt / Gulp /
+              Client-side / Nginx / PHP /
+              Apache / Comanche / Cheyenne / Sitting Bull / Pizza / Pasta / Mafia / Mandolino / South Italy /
+              Sir, Do You Have a Moment to Talk About Jesus Christ? / I hate seafood / Minimal Style /
+              I hate pizza made abroad, but I cannot avoid otherwise, I could become extinct / 
+              I hate ﬁsh in general / I hate who hates / Sometime I hate also myself / Slowpoke /
+              if you arrived here, that's mean you don't have so much to do :P / Bower / GIT / SVN /
+              OOP / AJAX / REST / I'm Batman / Redis Cache / MongoDB / I played american football in Italy and I 
+              hate who think rugby is better... / I wrote these bullshits at 2am / I have a motorbike here in 
+              Holland, brought from Malta and bought in Sicily... still have to fix it, i'm worried cause I could
+              run away for the bad weather of Holland / Sort of Single / <span id="yearsOld">Age 26... would you like be, ah?</span> years old /
+              Electronic / Fuck off / Power Metal / Punk Rock / Blues / Whatever /
+              <a href="mailto:im@rocco.me?subject=Inquiry from website" class="hire-me">Want hire me?</a>
+            </p>
+
+          </div>
+        </div>
+
+        <div class="shitty-version">
+          <span id="shittyVersion">v0.0.0</span>
         </div>
 
       </div>
@@ -66,13 +84,12 @@
       ga('send', 'pageview');
     </script>
 
-    <!-- build:js scripts/vendor.js -->
+    <!-- build:js scripts/app.js -->
     <!-- bower:js -->
     <!-- endbower -->
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/main.js"></script>
     <!-- endbuild -->
 
-        <!-- build:js scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
 </body>
 </html>
