@@ -1,0 +1,56 @@
+
+//
+// Mixins
+// ==================================================
+
+// Remove the unit of a length
+// @param {Number} $number - Number to remove unit from
+// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+
+// Mixin converter for Pixel to REM, plus fallback in pixel for older browser
+// @param  {float}  $property  Name of property
+// @param  {[type]} $values... Top, Right, Bottom, Left pixel values
+// @return {css}    Property converted in REM and fallback
+// Example: @include('padding', .5, .5, .15, .15);
+@mixin rem($property, $values...) {
+  $base_pixel_size: 16px;
+  $max: length($values);
+  $pxValues: '';
+  $remValues: '';
+
+  @for $i from 1 through $max {
+
+    @if nth($values, $i) != 'important' {
+
+      $value: nth($values, $i);
+      $value: strip-unit($value);
+
+      $remVal: ($value / 16);
+      $pxValues: #{$pxValues + $value}px;
+      $remValues: #{$remValues + $remVal}rem;
+    }
+
+    @if $i < $max {
+      $pxValues: #{$pxValues + " "};
+      $remValues: #{$remValues + " "};
+    }
+
+    @if $i == $max {
+      @if nth($values, $i) == 'important' {
+        $pxValues: #{$pxValues + " !important"};
+        $remValues: #{$remValues + " !important"};
+      }
+    }
+  }
+
+  #{$property}: $pxValues;
+  #{$property}: $remValues;
+}
