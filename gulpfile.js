@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var del = require('del');
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
