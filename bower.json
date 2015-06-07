@@ -1,9 +1,8 @@
 {
   "name": "xdemocle-github-io",
+  "version": "0.0.6",
   "private": true,
   "dependencies": {
-    "roboto-fontface": "~0.4.2",
-    "lato": "~0.3.0",
-    "simple-line-icons": "~1.0.0"
+    "lato": "~0.3.0"
   }
 }
