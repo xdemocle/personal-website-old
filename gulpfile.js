@@ -6,6 +6,11 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var del = require('del');
+var fs = require('fs');
+var semver = require('semver');
+var getPackageJson = function () {
+  return JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+};
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
@@ -126,7 +131,31 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
-gulp.task('deploy', ['build'], function () {
+// bump versions on package/bower/manifest 
+gulp.task('bump', function () {
+
+  // reget package 
+  var pkg = getPackageJson();
+
+  // increment version 
+  var newVer = semver.inc(pkg.version, 'patch');
+
+  // uses gulp-filter
+  var manifestFilter = $.filter(['manifest.json']);
+  var regularJsons = $.filter(['*', '!manifest.json']);
+ 
+  return gulp.src(['./bower.json', './package.json', './app/manifest.json'])
+    .pipe($.bump({
+      version: newVer
+    }))
+    .pipe(manifestFilter)
+    .pipe(gulp.dest('./app'))
+    .pipe(manifestFilter.restore())
+    .pipe(regularJsons)
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('upstream', ['build'], function () {
   return gulp.src('dist')
     .pipe($.subtree({
       remote: 'upstream',
@@ -134,4 +163,8 @@ gulp.task('deploy', ['build'], function () {
       message: 'New build'
     }))
     .pipe($.clean());
+});
+
+gulp.task('deploy', ['clean', 'bump'], function () {
+  gulp.start('upstream');
 });
