@@ -6,6 +6,7 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var del = require('del');
+var mainBowerFiles = require('main-bower-files');
 var fs = require('fs');
 var semver = require('semver');
 var pkg = (function () {
@@ -63,8 +64,9 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-  return gulp.src(require('main-bower-files')({
-    filter: '**/*.{eot,svg,ttf,woff,woff2}'
+  return gulp.src(mainBowerFiles({
+    filter: '**/*.{eot,svg,ttf,woff,woff2}',
+    debugging: false
   }).concat('app/fonts/**/*'))
     .pipe(gulp.dest('.tmp/fonts'))
     .pipe(gulp.dest('dist/fonts'));
