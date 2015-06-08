@@ -1,6 +1,6 @@
 {
   "name": "xdemocle-github-io",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "private": true,
   "dependencies": {
     "lato": "~0.3.0"
