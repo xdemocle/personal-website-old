@@ -134,12 +134,9 @@ gulp.task('default', ['clean'], function () {
 
 gulp.task('gitSemver', function () {
 
-  gulp.src(['app/manifest.json', 'bower.json', 'package.json'])
-    .pipe($.git.commit('Update semver to v'+pkg.version));
-
-  return $.git.push('origin', 'master', function (err) {
-    if (err) throw err;
-  });
+  return gulp.src(['app/manifest.json', 'bower.json', 'package.json'])
+    .pipe($.git.commit('Update semver to v'+pkg.version))
+    .pipe($.git.push('origin', 'master'));
 });
 
 // bump versions on package/bower/manifest 
