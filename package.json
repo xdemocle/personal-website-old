@@ -14,6 +14,7 @@
     "gulp-clean": "^0.3.1",
     "gulp-csso": "^0.2.6",
     "gulp-filter": "^2.0.2",
+    "gulp-git": "^1.2.4",
     "gulp-if": "^1.2.1",
     "gulp-imagemin": "^2.0.0",
     "gulp-jshint": "^1.5.3",
@@ -32,7 +33,5 @@
     "semver": "^4.3.6",
     "wiredep": "^2.0.0"
   },
-  "dependencies": {
-    "gulp-git": "^1.2.4"
-  }
+  "dependencies": {}
 }
