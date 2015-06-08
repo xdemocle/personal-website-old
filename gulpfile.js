@@ -175,6 +175,7 @@ gulp.task('upstream', ['build'], function () {
     // .pipe($.clean());
 });
 
-gulp.task('deploy', ['clean', 'bump', 'gitSemver'], function () {
+// gulp.task('deploy', ['clean', 'bump', 'gitSemver'], function () {
+gulp.task('deploy', ['clean'], function () {
   gulp.start('upstream');
 });
