@@ -172,7 +172,7 @@ gulp.task('upstream', ['build'], function () {
       branch: 'master',
       message: 'New build v'+pkg.version
     }))
-    .pipe($.clean());
+    // .pipe($.clean());
 });
 
 gulp.task('deploy', ['clean', 'bump', 'gitSemver'], function () {
