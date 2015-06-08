@@ -8,9 +8,9 @@ var reload = browserSync.reload;
 var del = require('del');
 var fs = require('fs');
 var semver = require('semver');
-var getPackageJson = function () {
+var pkg = (function () {
   return JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-};
+})();
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
@@ -132,14 +132,23 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
+gulp.task('gitSemver', function () {
+
+  gulp.src(['app/manifest.json', 'bower.json', 'package.json'])
+    .pipe($.git.commit('Update semver to v'+pkg.version));
+
+  return $.git.push('origin', 'master', function (err) {
+    if (err) throw err;
+  });
+});
+
 // bump versions on package/bower/manifest 
 gulp.task('bump', function () {
 
-  // reget package 
-  var pkg = getPackageJson();
-
   // increment version 
   var newVer = semver.inc(pkg.version, 'patch');
+
+  pkg.version = newVer;
 
   // uses gulp-filter
   var manifestFilter = $.filter(['manifest.json']);
@@ -157,6 +166,7 @@ gulp.task('bump', function () {
 });
 
 gulp.task('upstream', ['build'], function () {
+
   return gulp.src('dist')
     .pipe($.subtree({
       remote: 'upstream',
@@ -166,6 +176,6 @@ gulp.task('upstream', ['build'], function () {
     .pipe($.clean());
 });
 
-gulp.task('deploy', ['clean', 'bump'], function () {
+gulp.task('deploy', ['clean', 'bump', 'gitSemver'], function () {
   gulp.start('upstream');
 });
