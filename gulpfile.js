@@ -171,7 +171,7 @@ gulp.task('upstream', ['build'], function () {
     .pipe($.subtree({
       remote: 'upstream',
       branch: 'master',
-      message: 'New build'
+      message: 'New build v'+pkg.version
     }))
     .pipe($.clean());
 });
