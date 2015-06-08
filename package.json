@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.10",
+  "version": "0.0.12",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -31,5 +31,8 @@
     "opn": "^1.0.0",
     "semver": "^4.3.6",
     "wiredep": "^2.0.0"
+  },
+  "dependencies": {
+    "gulp-git": "^1.2.4"
   }
 }
