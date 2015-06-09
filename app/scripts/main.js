@@ -1,42 +1,42 @@
 /* jshint devel:true */
 /**
- * Main Rocco.me JavaScript file
+ * Main Rocco.me JavaScript file 
  */
-(function(win){
+(function(win) {
 
   'use strict';
 
   /**
-   * Do you wanna hire me? function
+   * Do you wanna hire me? function 
    */
-  var confirmHireMe = function () {
+  var confirmHireMe = function() {
 
     // Return confirm message
-    return confirm('After all these bullshits, you still wanna hire me?');
+    return confirm('Are you sure?');
   };
 
   /**
    * Update website version
    */
-  var updateWebsiteSemver = function () {
+  var updateWebsiteSemver = function() {
 
     // shittyVersion span ID
     var shittyVersionEl = win.document.getElementById('shittyVersion');
 
-    win.callAjax('/manifest.json', function (jsonData) {
+    win.callAjax('/manifest.json', function(jsonData) {
 
       // Update text
       shittyVersionEl.innerHTML = 'v' + JSON.parse(jsonData).version;
     });
-  };  
+  };
 
   /**
-   * Add click event
+   * Add click event 
    */
-  var addClickEvent = function (target) {
+  var addClickEvent = function(target) {
 
     // Bind clicks on links with hostname different from local one
-    target.addEventListener('click', function (evt) {
+    target.addEventListener('click', function(evt) {
 
       // Prevent default behaviour of links
       evt.preventDefault();
@@ -69,7 +69,7 @@
   /**
    * years_old
    */
-  var yearsOldParse = function () {
+  var yearsOldParse = function() {
 
     // yearsOld span ID
     var yearsOldEl = win.document.getElementById('yearsOld');
@@ -84,13 +84,13 @@
   /**
    * All link tags
    */
-  var allLinkTags = function () {
+  var allLinkTags = function() {
 
     // All links
     var aTags = win.document.getElementsByTagName('a');
 
     // Add event listener for each links found it
-    for (var i=0;i<aTags.length;i++){
+    for (var i = 0; i < aTags.length; i++) {
       addClickEvent(aTags[i]);
     }
   };
@@ -98,34 +98,41 @@
   /**
    * Update HTML tag classes
    */
-  var updateHtmlClasses = function (newClasses) {
+  var updateHtmlClasses = function(newClasses) {
 
     // Local html tag
     var html = win.document.getElementsByTagName('html')[0];
 
-    // Remove initial .no-js class by default
+    // Remove initial.no - js class by default
     html.className = html.className.replace('no-js', '');
 
     // Update classes
-    if (newClasses) { html.className = html.className + ' ' + newClasses; }
+    if (newClasses) {
+      html.className = html.className + ' ' + newClasses;
+    }
+  };
+
+  /**
+   * Welcome confirm message
+   */
+  var welcomeMessage = function() {
+
+    // Load
+    win.simpleModal('&#8220;True spirit of Zen, allowing your bright side ' +
+      'coexist with your dark one.&#8221;', 'confirm');
   };
 
   /**
    * Initialize function on load of the page
    */
-  var initialize = function () {
+  var initialize = function() {
 
-    // Run
+    // Run all
     updateHtmlClasses();
-
-    // Run
     yearsOldParse();
-
-    // Run
     allLinkTags();
-
-    // Run
     updateWebsiteSemver();
+    // welcomeMessage();
   };
 
   /**
