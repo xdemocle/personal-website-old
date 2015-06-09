@@ -115,12 +115,12 @@
   /**
    * Welcome confirm message
    */
-  var welcomeMessage = function() {
+  // var welcomeMessage = function() {
 
-    // Load
-    win.simpleModal('&#8220;True spirit of Zen, allowing your bright side ' +
-      'coexist with your dark one.&#8221;', 'confirm');
-  };
+  //   // Load
+  //   win.simpleModal('&#8220;True spirit of Zen, allowing your bright side ' +
+  //     'coexist with your dark one.&#8221;', 'confirm');
+  // };
 
   /**
    * Initialize function on load of the page

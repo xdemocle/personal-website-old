@@ -52,7 +52,7 @@
       text.setAttribute('class', 'text');
       
       // Set p content and append to text
-      p.innerHTML = msg;
+      p.innerHTML = htmlString;
       text.appendChild(p);
       
       // Append text to
@@ -68,7 +68,7 @@
       console.log(modal);
       
       // Append to body of page
-      // doc.body.appendChild(modal); 
+      doc.body.appendChild(modal); 
     }
 
     // Create modal
