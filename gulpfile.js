@@ -134,13 +134,13 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
-gulp.task('gitSemverCommit', function () {
+gulp.task('gitSemverCommit', ['bump'], function () {
 
   return gulp.src(['app/manifest.json', 'bower.json', 'package.json'])
     .pipe($.exec('git commit <%= file.path %> -m "Update semver to v'+pkg.version+'"'));
 });
 
-gulp.task('gitCommitDist', function () {
+gulp.task('gitCommitDist', ['build'], function () {
 
   return gulp.src('./dist')
     .pipe($.exec('git add <%= file.path %> && git commit <%= file.path %> -m "Update dist folder to v'+pkg.version+'"'));
@@ -174,7 +174,7 @@ gulp.task('bump', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('upstream', ['gitSemverCommit', 'gitCommitDist'], function () {
+gulp.task('upstream', ['gitCommitDist'], function () {
 
   return gulp.src('./dist')
     .pipe($.exec('git subtree push --prefix=dist upstream master', function(){
@@ -190,6 +190,6 @@ gulp.task('upstream', ['gitSemverCommit', 'gitCommitDist'], function () {
     .pipe($.clean());
 });
 
-gulp.task('deploy', ['default', 'bump'], function () {
+gulp.task('deploy', ['clean', 'gitSemverCommit'], function () {
   gulp.start('upstream');
 });
