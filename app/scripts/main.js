@@ -128,8 +128,8 @@
       'firstLine': '&#8220;True spirit of Zen, allowing your bright side ' +
         'coexist with your dark one.&#8221;',
       'secondLine': 'This website contain an harsh language that could offend' +
-        'someone as well as isn\'t such professional. So, if you are thinking' +
-        'to propose me a job choose "Hide Bad Words" below.'
+        ' someone as well as isn\'t such professional. So, if you are thinking' +
+        ' to propose me a job choose "Hide Bad Words" below.'
     }, 'confirm');
   };
 
