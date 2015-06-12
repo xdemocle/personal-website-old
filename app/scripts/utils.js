@@ -115,7 +115,7 @@
     // Add show the #main div
     setTimeout(function(){
       addClass(modal, 'open');
-    }, 100)
+    }, 100);
   };
 
   /**
