@@ -99,6 +99,7 @@
           addClass(modal, 'close');
 
           removeClass(doc.getElementById('main'), 'blur');
+          removeClass(doc.body, 'no-overflow');
         }
 
         // Prevent normal behaviour
@@ -111,6 +112,7 @@
 
     // Append to body of page
     doc.body.appendChild(modal);
+    addClass(doc.body, 'no-overflow');
 
     // Add show the #main div
     setTimeout(function(){
