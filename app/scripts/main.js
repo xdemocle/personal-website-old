@@ -2,7 +2,7 @@
 /**
  * Main Rocco.me JavaScript file 
  */
-(function(win) {
+(function(win, doc, U) {
 
   'use strict';
 
@@ -21,9 +21,9 @@
   var updateWebsiteSemver = function() {
 
     // shittyVersion span ID
-    var shittyVersionEl = win.document.getElementById('shittyVersion');
+    var shittyVersionEl = doc.getElementById('shittyVersion');
 
-    win.callAjax('/manifest.json', function(jsonData) {
+    U.ajax('/manifest.json', function(jsonData) {
 
       // Update text
       shittyVersionEl.innerHTML = 'v' + JSON.parse(jsonData).version;
@@ -72,7 +72,7 @@
   var yearsOldParse = function() {
 
     // yearsOld span ID
-    var yearsOldEl = win.document.getElementById('yearsOld');
+    var yearsOldEl = doc.getElementById('yearsOld');
 
     // Calculate my years old
     var yearsOld = (new Date()).getFullYear() - 1982;
@@ -87,7 +87,7 @@
   var allLinkTags = function() {
 
     // All links
-    var aTags = win.document.getElementsByTagName('a');
+    var aTags = doc.getElementsByTagName('a');
 
     // Add event listener for each links found it
     for (var i = 0; i < aTags.length; i++) {
@@ -101,9 +101,9 @@
   var updateHtmlClasses = function(newClasses) {
 
     // Local html tag
-    var html = win.document.getElementsByTagName('html')[0];
+    var html = doc.getElementsByTagName('html')[0];
 
-    // Remove initial.no - js class by default
+    // Remove initial .no-js class by default
     html.className = html.className.replace('no-js', '');
 
     // Update classes
@@ -115,12 +115,23 @@
   /**
    * Welcome confirm message
    */
-  // var welcomeMessage = function() {
+  var welcomeMessage = function() {
 
-  //   // Load
-  //   win.simpleModal('&#8220;True spirit of Zen, allowing your bright side ' +
-  //     'coexist with your dark one.&#8221;', 'confirm');
-  // };
+    // Hide loader
+    U.addClass(doc.getElementById('preloader'), 'displayHide');
+
+    // Remove hide to show the #main div
+    U.removeClass(doc.getElementById('main'), 'hide');
+
+    // Load
+    U.simpleModal({
+      'firstLine': '&#8220;True spirit of Zen, allowing your bright side ' +
+        'coexist with your dark one.&#8221;',
+      'secondLine': 'This website contain an harsh language that could offend' +
+        'someone as well as isn\'t such professional. So, if you are thinking' +
+        'to propose me a job choose "Hide Bad Words" below.'
+    }, 'confirm');
+  };
 
   /**
    * Initialize function on load of the page
@@ -132,16 +143,12 @@
     yearsOldParse();
     allLinkTags();
     updateWebsiteSemver();
-    // welcomeMessage();
   };
 
   /**
-   * When document is loaded run initialize
+   * When DOM is loaded, run initialize and welcomeMessage for window
    */
-  if (win.addEventListener) {
-    win.document.addEventListener('DOMContentLoaded', initialize, false);
-  } else if (win.attachEvent) {
-    win.document.attachEvent('onDOMContentLoaded', initialize);
-  }
+  U.listenEvent(doc, 'DOMContentLoaded', initialize);
+  U.listenEvent(win, 'load', welcomeMessage);
 
-})(this);
+})(this, this.document, this.utils);
