@@ -174,13 +174,22 @@ gulp.task('bump', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('upstream', function () {
+gulp.task('upstream', ['gitSemverCommit', 'gitCommitDist'], function () {
 
   return gulp.src('./dist')
-    .pipe($.exec('git subtree push --prefix=dist upstream master'))
+    .pipe($.exec('git subtree push --prefix=dist upstream master', function(){
+
+      // gutil.log('Resetting ./dist temporary commit');
+
+      $.exec('git push origin master', function () {
+
+        gutil.log('Resetting ./dist temporary commit');
+        $.exec('git reset HEAD^');
+      });
+    }))
     .pipe($.clean());
 });
 
-gulp.task('deploy', ['default', 'bump', 'gitSemverCommit'], function () {
+gulp.task('deploy', ['default', 'bump'], function () {
   gulp.start('upstream');
 });
