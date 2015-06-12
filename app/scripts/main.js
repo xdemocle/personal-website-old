@@ -31,6 +31,34 @@
   };
 
   /**
+   * [slideContainer description]
+   * @return {[type]} [description]
+   */
+  // var slideContainer = function(slideTo) {
+  //   var container = doc.getElementById('main');
+  // 
+  //   // <div class="slider-control" id="slider-control">
+  //   //   <a name="slideToLeft"><<</a>
+  //   //   <a name="slideToCenter">O</a>
+  //   //   <a name="slideToRight">>></a>
+  //   // </div>
+  // 
+  //   U.removeClass(container, 'slideToLeft');
+  //   U.removeClass(container, 'slideToCenter');
+  //   U.removeClass(container, 'slideToRight');
+  // 
+  //   if (slideTo === 'slideToLeft') {
+  //     U.addClass(container, 'slideToLeft');
+  //   }
+  //   if (slideTo === 'slideToCenter') {
+  //     U.addClass(container, 'slideToCenter');
+  //   }
+  //   if (slideTo === 'slideToRight') {
+  //     U.addClass(container, 'slideToRight');
+  //   }
+  // };
+
+  /**
    * Add click event 
    */
   var addClickEvent = function(target) {
@@ -59,6 +87,11 @@
         // Open in a new browser window
         return win.open(evt.target.href, '_blank');
       }
+
+      // Check if is control
+      // if (evt.target.name.length > 0) {
+      //   return slideContainer(evt.target.name);
+      // }
 
       // If no return, restore normal behaviour
       win.location.href = evt.target.href;
@@ -128,8 +161,8 @@
       'firstLine': '&#8220;True spirit of Zen, allowing your bright side ' +
         'coexist with your dark one.&#8221;',
       'secondLine': 'This website contain an harsh language that could offend' +
-        ' someone as well as isn\'t such professional. So, if you are thinking' +
-        ' to propose me a job choose "Hide Bad Words" below.'
+        ' some people. So, if you are thinking' +
+        ' to propose me a job choose "Hide Bad Words" below. :-D'
     }, 'confirm');
   };
 
