@@ -134,14 +134,17 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
-gulp.task('gitSemver', function () {
+gulp.task('gitSemverCommit', function () {
 
-  gulp.src(['app/manifest.json', 'bower.json', 'package.json'])
-    .pipe($.git.commit('Update semver to v'+pkg.version));
+  return gulp.src(['app/manifest.json', 'bower.json', 'package.json'])
+    .pipe($.git.commit('Update semver to v'+pkg.version)); 
+});
 
-    $.git.push('origin', 'master', function (err) {
-      if (err) throw err;
-    })
+gulp.task('gitSemverPush', function () {
+
+  $.git.push('origin', 'master', function (err) {
+    if (err) throw err;
+  })
 });
 
 // bump versions on package/bower/manifest 
@@ -178,6 +181,6 @@ gulp.task('upstream', ['build'], function () {
     // .pipe($.clean());
 });
 
-gulp.task('deploy', ['clean', 'bump', 'gitSemver'], function () {
+gulp.task('deploy', ['clean', 'bump', 'gitSemverCommit', 'gitSemverPush'], function () {
   gulp.start('upstream');
 });
