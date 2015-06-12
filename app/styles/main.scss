@@ -1,11 +1,10 @@
 // bower:scss
 // endbower
 
-@import "partials/mixins";
-
 // 
 // Variables
 // -----------------------------------------------
+
 $black: #000;
 $white: #fff;
 $grey: #ccc;
@@ -13,6 +12,15 @@ $dark-grey: #636363;
 
 $font-failsafe: Helvetica, Arial, sans-serif;
 $font-core: 'Roboto', $font-failsafe;
+
+
+// 
+// Imports
+// -----------------------------------------------
+
+@import "partials/mixins";
+@import "partials/modal";
+@import "partials/utils";
 
 
 // 
@@ -32,7 +40,7 @@ html, body {
 
 html {
   // Root EM
-  font-size: 18px;
+  font-size: 19px;
 }
 
 body {
@@ -44,9 +52,9 @@ body {
 a {
   color: $black;
 
-  &:visited {
-    color: $dark-grey;
-  }
+  // &:visited {
+  //   color: $dark-grey;
+  // }
 
   &:hover {
     color: $black;
@@ -66,6 +74,7 @@ a {
   overflow-x: hidden;
   overflow-y: auto;
   overflow-y: overlay;
+  transition: visibility .1s, opacity 1s;
 }
 
 .stucazz-wrapper {
@@ -89,7 +98,8 @@ a {
     display: block;
     margin: 0 auto;
 
-    width: 80%;
+    width: 100%;
+    @include rem('max-width', 647);
     height: auto;
 
     transition: all .5s linear;
@@ -111,7 +121,11 @@ a {
     @include rem('font-size', 12);
     @include rem('line-height', 25);
     @include rem('margin', 5, 0);
-    @include rem('padding', 0, 10);
+    @include rem('padding', 0, 20);
+
+    &:last-child {
+      @include rem('margin', 30, 0, 5, 0);
+    }
   }  
 }
 
@@ -120,17 +134,22 @@ a {
 // Typography
 // -----------------------------------------------
 
+h2 {
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
 h3 {
   display: inline-block;
   margin: 0 auto;
   padding: 0;
   text-align: center;
-  font-weight: 300;
+  font-weight: 400;
 
   span {
     display: block;
     font-size: 70%;
-    font-weight: 300;
+    font-weight: 400;
     @include rem('letter-spacing', 1);
     @include rem('margin-top', 5);
     @include rem('padding', 10, 10);
@@ -154,16 +173,14 @@ h3 {
 // Media queries
 // -----------------------------------------------
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
 
   html {
     font-size: 16px;
   }
+
   .content-dmmerd {
     @include rem('margin-top', -50);
-  }
-  .enso-kitemmurt img {
-    width: auto;
   }
 }
 
@@ -188,54 +205,21 @@ h3 {
       bottom: 0;
       left: 0;
       margin-top: -50%;
-      width: 90%;
+      // width: 90%;
       height: auto;
       max-height: none;
     }
   }
 
   .content-dmmerd {
-    display: block;
+    display: table;
     width: 50%;
     margin-left: 50%;
     height: 100%;
-    vertical-align: middle;
+    margin-top: 0;
+
+    .inner {
+      display: table-cell;
+    }
   }
-}
-
-
-// 
-// Utils
-// -----------------------------------------------
-
-body.hide-harsh span.harsh {
-  display: none;
-}
-
-.shitty-version {
-  position: absolute;
-  top: 0;
-  left: 0;
-  user-select: none;
-  cursor: default;
-
-  span {
-    display: block;
-    font-weight: 300;
-    @include rem('font-size', 8);
-    @include rem('padding', 3, 0, 0, 3);
-  }
-}
-
-.browserupgrade {
-  position: absolute;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin: 0;
-  background: $grey;
-  background: rgba($grey, .8);
-  color: $black;
-  @include rem('padding', 8);
 }
