@@ -143,7 +143,7 @@ gulp.task('gitSemverCommit', function () {
 gulp.task('gitCommitDist', function () {
 
   return gulp.src('./dist')
-    .pipe($.exec('git add ./dist && git commit <%= file.path %> -m "Update dist folder to v'+pkg.version+'"'));
+    .pipe($.exec('git add <%= file.path %> && git commit <%= file.path %> -m "Update dist folder to v'+pkg.version+'"'));
 });
 
 gulp.task('gitPush', function () {
