@@ -137,14 +137,18 @@ gulp.task('default', ['clean'], function () {
 gulp.task('gitSemverCommit', function () {
 
   return gulp.src(['app/manifest.json', 'bower.json', 'package.json'])
-    .pipe($.git.commit('Update semver to v'+pkg.version)); 
+    .pipe($.exec('git commit <%= file.path %> -m "Update semver to v'+pkg.version+'"'));
 });
 
-gulp.task('gitSemverPush', function () {
+gulp.task('gitCommitDist', function () {
 
-  $.git.push('origin', 'master', function (err) {
-    if (err) throw err;
-  })
+  return gulp.src('./dist')
+    .pipe($.exec('git add ./dist && git commit <%= file.path %> -m "Update dist folder to v'+pkg.version+'"'));
+});
+
+gulp.task('gitPush', function () {
+
+  $.exec('git push origin master');
 });
 
 // bump versions on package/bower/manifest 
@@ -170,17 +174,13 @@ gulp.task('bump', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('upstream', ['build'], function () {
+gulp.task('upstream', function () {
 
-  return gulp.src('dist')
-    .pipe($.subtree({
-      remote: 'upstream',
-      branch: 'master',
-      message: 'New build v'+pkg.version
-    }))
-    // .pipe($.clean());
+  return gulp.src('./dist')
+    .pipe($.exec('git subtree push --prefix=dist upstream master'))
+    .pipe($.clean());
 });
 
-gulp.task('deploy', ['clean', 'bump', 'gitSemverCommit', 'gitSemverPush'], function () {
+gulp.task('deploy', ['default', 'bump', 'gitSemverCommit'], function () {
   gulp.start('upstream');
 });
