@@ -12,20 +12,25 @@
   left: 0;
   background: rgba($black, .6);
 
+  overflow-y: overlay;
+  height: 100%;
+
   // Default status
   visibility: hidden;
   opacity: 0;
   transition: opacity .2s linear, visibility .1s linear .4s;
 
   .modal-wrapper {
-    width: auto;
-    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    @include rem('max-width', 640);
     padding: 5%;
-    overflow: hidden;
   }
 
   .modal-content {
-    height: 100%;
     background: $white;
     overflow-x: hidden;
     overflow-y: auto;
@@ -79,24 +84,5 @@
   &.close {
     visibility: hidden;
     opacity: 0;
-  }
-}
-
-
-//
-// Media queries
-// -------------------------------------------------
-
-@media (min-width: 768px) {
-
-  .modal {
-
-    .modal-wrapper {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      height: auto;
-    }
   }
 }
