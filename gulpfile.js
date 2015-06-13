@@ -7,6 +7,7 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var del = require('del');
 var mainBowerFiles = require('main-bower-files');
+var exec = require('child_process').exec;
 var fs = require('fs');
 var semver = require('semver');
 var pkg = (function () {
@@ -136,19 +137,17 @@ gulp.task('default', ['clean'], function () {
 
 gulp.task('gitSemverCommit', ['bump'], function () {
 
-  return gulp.src(['app/manifest.json', 'bower.json', 'package.json'])
-    .pipe($.exec('git commit <%= file.path %> -m "Update semver to v'+pkg.version+'"'));
+  exec('git commit app/manifest.json bower.json package.json -m "Update semver to v'+pkg.version+'"');
 });
 
 gulp.task('gitCommitDist', ['build'], function () {
 
-  return gulp.src('./dist')
-    .pipe($.exec('git add <%= file.path %> && git commit <%= file.path %> -m "Update dist folder to v'+pkg.version+'"'));
+  exec('git add ./dist && git commit ./dist -m "Update dist folder to v'+pkg.version+'"');
 });
 
 gulp.task('gitPush', function () {
 
-  $.exec('git push origin master');
+  exec('git push origin master');
 });
 
 // bump versions on package/bower/manifest 
@@ -176,18 +175,15 @@ gulp.task('bump', function () {
 
 gulp.task('upstream', ['gitCommitDist'], function () {
 
-  return gulp.src('./dist')
-    .pipe($.exec('git subtree push --prefix=dist upstream master', function(){
+  exec('git subtree push --prefix=dist upstream master', function(){
 
-      // gutil.log('Resetting ./dist temporary commit');
-
-      $.exec('git push origin master', function () {
+      exec('git push origin master', function () {
 
         gutil.log('Resetting ./dist temporary commit');
-        $.exec('git reset HEAD^');
+        exec('git reset HEAD^');
       });
-    }))
-    .pipe($.clean());
+    })
+    // .pipe($.clean());
 });
 
 gulp.task('deploy', ['clean', 'gitSemverCommit'], function () {
