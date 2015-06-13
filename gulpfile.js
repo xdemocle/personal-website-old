@@ -179,7 +179,7 @@ gulp.task('upstream', ['gitCommitDist'], function () {
 
       exec('git push origin master', function () {
 
-        $.gutil.log('Resetting ./dist temporary commit');
+        $.util.log('Resetting ./dist temporary commit');
         exec('git reset HEAD^');
       });
     })
