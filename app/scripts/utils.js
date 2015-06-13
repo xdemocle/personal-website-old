@@ -106,7 +106,7 @@
 
         // Execute the callback passed as param
         if (typeof callback === 'function') {
-          callback(hash === 'okay' ? 1 : 0);
+          callback(hash);
         }
 
         // Prevent normal behaviour

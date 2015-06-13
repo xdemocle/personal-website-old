@@ -181,7 +181,7 @@
 
         // Notify Google Analytics
         if (typeof win.ga === 'function') {
-          win.ga('send', 'event', 'button', 'click', 'bad-words', value);
+          win.ga('send', 'event', 'button', 'click', 'bad-words-'+value);
         }
       }
     );
