@@ -147,7 +147,10 @@ gulp.task('commitDist', ['build'], function () {
 
 gulp.task('gitPush', function () {
 
-  exec('git push origin master');
+  exec('git push origin master', function(error, stdout, stderr) {
+
+    $.util.log(stderr);
+  });
 });
 
 // bump versions on package/bower/manifest 
@@ -175,17 +178,26 @@ gulp.task('bump', function () {
 
 gulp.task('upstream', ['commitDist'], function () {
 
-  exec('git subtree push --prefix=dist upstream master', function(){
+  // return exec('git subtree push --prefix=dist --squash upstream master');
+  
+  var upstreamDelayed = function () {
 
-      exec('git push origin master', function () {
+    exec('git subtree push --prefix=dist upstream master', function(error, stdout, stderr){
+
+      $.util.log(stderr);
+
+      exec('git push origin master', function (error, stdout, stderr) {
 
         // $.util.log('Resetting ./dist temporary commit');
         // exec('git reset HEAD^');
       });
-    })
-    // .pipe($.clean());
+    })    
+  };
+
+  setTimeout(upstreamDelayed, 1500);
 });
 
 gulp.task('deploy', ['clean', 'semverCommit'], function () {
   gulp.start('upstream');
 });
+;
