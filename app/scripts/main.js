@@ -72,6 +72,11 @@
       // Hook hire-me class for confirm
       if (evt.target.className === 'hire-me') {
 
+        // Notify Google Analytics
+        if (typeof win.ga === 'function') {
+          win.ga('send', 'event', 'button', 'click', 'hire-me-clicked');
+        }
+
         // If confirm is false, block execution
         if (!confirmHireMe()) {
           return false;
@@ -157,13 +162,30 @@
     U.removeClass(doc.getElementById('main'), 'hide');
 
     // Load
-    U.simpleModal({
-      'firstLine': '&#8220;True spirit of Zen, allowing your bright side ' +
-        'coexist with your dark one.&#8221;',
-      'secondLine': 'This website contain an harsh language that could offend' +
-        ' some people. So, if you are thinking' +
-        ' to propose me a job choose "Hide Bad Words" below. :-D'
-    }, 'confirm');
+    U.simpleModal(
+
+      // Messages
+      {
+        'firstLine': '&#8220;True spirit of Zen, allowing your bright side ' +
+          'coexist with your dark one.&#8221;',
+        'secondLine': 'This website contain an harsh language that could offend' +
+          ' some people. So, if you are thinking' +
+          ' to propose me a job choose "Hide Bad Words" below. :-D'
+      },
+
+      // Set type
+      'confirm',
+
+      // Callback
+      function(value){
+
+        // Notify Google Analytics
+        if (typeof win.ga === 'function') {
+          win.ga('send', 'event', 'button', 'click', 'bad-words', value);
+        }
+      }
+    );
+
   };
 
   /**

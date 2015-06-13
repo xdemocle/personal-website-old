@@ -38,11 +38,12 @@
 
   /**
    * Very simple modal
-   * @param  {[type]} msg  [description]
-   * @param  {[type]} type [description]
-   * @return {[type]}      [description]
+   * @param  {[type]}   msg      [description]
+   * @param  {[type]}   type     [description]
+   * @param  {Function} callback [description]
+   * @return {[type]}            [description]
    */
-  var simpleModal = function(msg, type) { 
+  var simpleModal = function(msg, type, callback) { 
 
     // Select default status for type
     type = type || 'alert';
@@ -80,6 +81,7 @@
       confirmBox.innerHTML = '<div><a href="#okay">Show All Words</a>' +
                              '<a href="#nope">Hide Bad Words</a></div>';
 
+      // Append the confirmBox group
       content.appendChild(confirmBox);
 
       // All links in confirm box
@@ -100,6 +102,11 @@
 
           removeClass(doc.getElementById('main'), 'blur');
           removeClass(doc.body, 'no-overflow');
+        }
+
+        // Execute the callback passed as param
+        if (typeof callback === 'function') {
+          callback(hash === 'okay' ? 1 : 0);
         }
 
         // Prevent normal behaviour
