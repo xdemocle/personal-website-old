@@ -135,12 +135,12 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
-gulp.task('gitSemverCommit', ['bump'], function () {
+gulp.task('semverCommit', ['bump'], function () {
 
   exec('git commit app/manifest.json bower.json package.json -m "Update semver to v'+pkg.version+'"');
 });
 
-gulp.task('gitCommitDist', ['build'], function () {
+gulp.task('commitDist', ['build'], function () {
 
   exec('git add ./dist && git commit ./dist -m "Update dist folder to v'+pkg.version+'"');
 });
@@ -173,19 +173,19 @@ gulp.task('bump', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('upstream', ['gitCommitDist'], function () {
+gulp.task('upstream', ['commitDist'], function () {
 
   exec('git subtree push --prefix=dist upstream master', function(){
 
       exec('git push origin master', function () {
 
-        $.util.log('Resetting ./dist temporary commit');
-        exec('git reset HEAD^');
+        // $.util.log('Resetting ./dist temporary commit');
+        // exec('git reset HEAD^');
       });
     })
     // .pipe($.clean());
 });
 
-gulp.task('deploy', ['clean', 'gitSemverCommit'], function () {
+gulp.task('deploy', ['clean', 'semverCommit'], function () {
   gulp.start('upstream');
 });
