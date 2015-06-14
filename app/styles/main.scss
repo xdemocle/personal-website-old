@@ -170,7 +170,7 @@ h3 {
   display: inline-block;
   @include rem('margin', 0, 0, 10, 0);
   padding: 0;
-  text-align: center;
+  text-align: left;
   @include rem('font-size', 20);
   font-weight: 400;
 
@@ -181,6 +181,7 @@ h3 {
     @include rem('border-bottom-width', 1);
     border-bottom-style: solid;
     border-bottom-color: $black;
+    text-align: center;
   }
 
   .sub-line {
