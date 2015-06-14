@@ -190,7 +190,8 @@
           win.ga('send', 'event', 'button', 'click', 'bad-words-'+value);
         }
 
-        win.triggerTypewriterTerminal()
+        // Trigger typewriter terminal function
+        win.triggerTypewriterTerminal();
       }
     );
   };
@@ -211,7 +212,7 @@
     var randomTime = function() {
       var rand = Math.floor(Math.random(1,5) * 1000 / 3);
       return rand;
-    }
+    };
     
     var i = 0;
     var countLetters = letters.length;
@@ -232,7 +233,7 @@
       setTimeout(typeNext, rand);
 
       i+=1;
-    }
+    };
     
     // Execute the first time
     if (place.innerHTML.length > 3 || id.length > 0) {
