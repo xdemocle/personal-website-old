@@ -6,10 +6,6 @@
 
   'use strict';
 
-  // Add hide to hidden the #main div
-  doc.getElementById('main').setAttribute('style', 'display: none');
-  U.addClass(doc.getElementById('main'), 'hide');
-
   /**
    * Do you wanna hire me? function 
    */
@@ -152,9 +148,6 @@
     if (newClasses) {
       html.className = html.className + ' ' + newClasses;
     }
-
-    // Preloader
-    U.removeClass(doc.getElementById('preloader'), 'hide');
   };
 
   /**
