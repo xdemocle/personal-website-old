@@ -31,9 +31,10 @@
   }
 
   .modal-content {
-    background: $white;
+    position: relative;
     overflow-x: hidden;
     overflow-y: auto;
+    background: $white;
   }
 
   .text, .confirmBox {
@@ -71,6 +72,28 @@
       display: table-cell;
       width: 50%;
       text-align: center;
+    }
+  }
+
+  .modal-closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    user-select: none;
+
+    &:after {
+      content: '\00D7';
+      display: block;
+      @include rem('width', 18);
+      @include rem('height', 18);
+      @include rem('line-height', 18);
+      @include rem('font-size', 18);
+      @include rem('margin', 7, 5);
+      cursor: pointer;
+      text-align: center;
+      background-color: $black;
+      color: $white;
     }
   }
 

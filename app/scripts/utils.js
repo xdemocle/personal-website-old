@@ -43,7 +43,7 @@
    * @param  {Function} callback [description]
    * @return {[type]}            [description]
    */
-  var simpleModal = function(msg, type, callback) { 
+  var simpleModal = function(msg1, msg2, type, callback) { 
 
     // Select default status for type
     type = type || 'alert';
@@ -52,9 +52,24 @@
     var modal = createEl('div'),
       wrapper = createEl('div'),
       content = createEl('div'),
+      closeButton = createEl('span'),
       text = createEl('div'),
       confirmBox = createEl('div'),
       className = 'modal ' + type;
+
+    var closeModal = function(hash){
+      hash = hash || 'nope';
+
+      removeClass(modal, 'open');
+      addClass(modal, 'close');
+      removeClass(doc.getElementById('main'), 'blur');
+      removeClass(doc.body, 'no-overflow');
+
+      // Execute the callback passed as param
+      if (typeof callback === 'function') {
+        callback(hash);
+      }
+    };
     
     // Set modal's classes
     addClass(modal, className);
@@ -63,8 +78,11 @@
     addClass(text, 'text');
     
     // Set p content and append to text
-    text.innerHTML = '<p class="firstLine">'+msg.firstLine+'</p>' +
-      '<p class="secondLine">'+msg.secondLine+'</p>';
+    text.innerHTML = '<p class="firstLine">'+msg1+'</p>';
+
+    if (msg2) {
+      text.innerHTML = text.innerHTML + '<p class="secondLine">'+msg2+'</p>';
+    }
     
     // Append text to
     content.appendChild(text);
@@ -90,24 +108,14 @@
       // Event listening
       listenEvent(confirmLinks, 'click', function(evt){
 
-        var hash = evt.target.hash.replace('#', '');
+        var hash = evt.target.hash.replace('#', '') || false;
 
         if (hash.length > 0) {
-
           if (hash === 'nope') { addClass(doc.body, 'hide-harsh'); }
           if (hash === 'okay') { removeClass(doc.body, 'hide-harsh'); }
-
-          removeClass(modal, 'open');
-          addClass(modal, 'close');
-
-          removeClass(doc.getElementById('main'), 'blur');
-          removeClass(doc.body, 'no-overflow');
         }
 
-        // Execute the callback passed as param
-        if (typeof callback === 'function') {
-          callback(hash);
-        }
+        closeModal(hash);
 
         // Prevent normal behaviour
         evt.preventDefault();
@@ -125,6 +133,13 @@
     setTimeout(function(){
       addClass(modal, 'open');
     }, 100);
+
+    // Append closeButton to
+    closeButton.setAttribute('class', 'modal-closeButton');
+    content.appendChild(closeButton);
+
+    // Event listening
+    listenEvent(closeButton, 'click', function(){ closeModal(); });
   };
 
   /**

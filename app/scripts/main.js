@@ -6,6 +6,10 @@
 
   'use strict';
 
+  // Add hide to hidden the #main div
+  doc.getElementById('main').setAttribute('style', 'display: none');
+  U.addClass(doc.getElementById('main'), 'hide');
+
   /**
    * Do you wanna hire me? function 
    */
@@ -148,6 +152,9 @@
     if (newClasses) {
       html.className = html.className + ' ' + newClasses;
     }
+
+    // Preloader
+    U.removeClass(doc.getElementById('preloader'), 'hide');
   };
 
   /**
@@ -159,19 +166,18 @@
     U.addClass(doc.getElementById('preloader'), 'displayHide');
 
     // Remove hide to show the #main div
+    doc.getElementById('main').removeAttribute('style');
     U.removeClass(doc.getElementById('main'), 'hide');
 
     // Load
     U.simpleModal(
 
       // Messages
-      {
-        'firstLine': '&#8220;True spirit of Zen, allowing your bright side ' +
-          'coexist with your dark one.&#8221;',
-        'secondLine': 'This website contain an harsh language that could offend' +
-          ' some people. So, if you are thinking' +
-          ' to propose me a job choose "Hide Bad Words" below. :-D'
-      },
+      '&#8220;True spirit of Zen, allowing your bright side ' +
+        'coexist with your dark one.&#8221;',
+      'This website contain an harsh language that could offend' +
+        ' some people. So, if you are thinking' +
+        ' to propose me a job choose "Hide Bad Words" below. :-D',
 
       // Set type
       'confirm',
@@ -183,9 +189,63 @@
         if (typeof win.ga === 'function') {
           win.ga('send', 'event', 'button', 'click', 'bad-words-'+value);
         }
+
+        win.triggerTypewriterTerminal()
       }
     );
+  };
 
+  /**
+   * [typewriterTerminalText description]
+   * @return {[type]} [description]
+   */
+  var typewriterTerminalText = function(id, idCursor) {
+
+    var place = doc.getElementById(id);
+    var letters = place.innerHTML.split('');
+    var cursor = doc.getElementById(idCursor);
+
+    // Reset innerHTML
+    place.innerHTML = '';
+    
+    var randomTime = function() {
+      var rand = Math.floor(Math.random(1,5) * 1000 / 3);
+      return rand;
+    }
+    
+    var i = 0;
+    var countLetters = letters.length;
+
+    var typeNext = function(){
+      
+      if (i>=countLetters) {
+        i=0;
+        place.innerHTML = '';
+      }
+
+      place.innerHTML = place.innerHTML + letters[i];
+
+      var rand = randomTime();
+
+      if (i===countLetters-1) { rand = 60000; }
+      
+      setTimeout(typeNext, rand);
+
+      i+=1;
+    }
+    
+    // Execute the first time
+    if (place.innerHTML.length > 3 || id.length > 0) {
+      typeNext();
+    }
+    
+    // cursor
+    if (cursor.innerHTML.length === 1) {
+
+      setInterval(function(){
+        cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+      }, 400);
+    }
   };
 
   /**
@@ -193,11 +253,18 @@
    */
   var initialize = function() {
 
-    // Run all
+    // Run the first
     updateHtmlClasses();
+
+    // Run all
     yearsOldParse();
     allLinkTags();
     updateWebsiteSemver();
+    
+    // Create trigger global function
+    win.triggerTypewriterTerminal = function() {
+      typewriterTerminalText('typewriter', 'cursor');
+    };
   };
 
   /**
