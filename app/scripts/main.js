@@ -202,6 +202,10 @@
    */
   var typewriterTerminalText = function(id, idCursor) {
 
+    // Defualt value
+    id = id || 'typewriter';
+    idCursor = idCursor || 'cursor';
+
     var place = doc.getElementById(id);
     var letters = place.innerHTML.split('');
     var cursor = doc.getElementById(idCursor);
@@ -228,7 +232,7 @@
 
       var rand = randomTime();
 
-      if (i===countLetters-1) { rand = 60000; }
+      if (i===countLetters-1) { rand = 30000; }
       
       setTimeout(typeNext, rand);
 
@@ -264,7 +268,7 @@
     
     // Create trigger global function
     win.triggerTypewriterTerminal = function() {
-      typewriterTerminalText('typewriter', 'cursor');
+      setTimeout(typewriterTerminalText, 1500);
     };
   };
 
