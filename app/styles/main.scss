@@ -33,7 +33,6 @@ $font-core: 'Roboto', $font-failsafe;
 
 html, body {
   width: 100%;
-  // height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -134,6 +133,7 @@ a {
 }
 
 .content-dmmerd {
+  margin-top: -10%;
 
   .inner {
     height: 100%;
@@ -168,21 +168,38 @@ h2 {
 
 h3 {
   display: inline-block;
-  margin: 0 auto;
+  @include rem('margin', 0, 0, 10, 0);
   padding: 0;
   text-align: center;
+  @include rem('font-size', 20);
   font-weight: 400;
 
-  span {
+  .first-line {
     display: block;
+    clear: both;
+    @include rem('padding', 5, 60);
+    @include rem('border-bottom-width', 1);
+    border-bottom-style: solid;
+    border-bottom-color: $black;
+  }
+
+  .sub-line {
+    position: relative;
+    text-align: left;
+    display: inline-block;
+    @include rem('margin-top', 5);
+    @include rem('padding', 10, 8, 0, 8);
+
     font-size: 70%;
     font-weight: 400;
     @include rem('letter-spacing', 1);
-    @include rem('margin-top', 5);
-    @include rem('padding', 10, 10);
-    @include rem('border-top-width', 1);
-    border-top-style: solid;
-    border-top-color: $black;
+    font-family: monospace;
+
+    .cursor {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
   }
 }
 
@@ -206,21 +223,21 @@ h3 {
     font-size: 16px;
   }
 
-  .content-dmmerd {
-    @include rem('margin-top', -50);
-  }
+  // .content-dmmerd {
+  //   @include rem('margin-top', -50);
+  // }
 }
 
 @media (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) {
 
   .stucazz-wrapper {
     max-width: none;
+    height: 100vh;
   }
 
   .enso-kitemmurt {
     position: fixed;
     top: 0;
-    // bottom: 0;
     left: 0;
     display: block;
     width: 50%;
