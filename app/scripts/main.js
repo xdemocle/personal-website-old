@@ -9,11 +9,11 @@
   /**
    * Do you wanna hire me? function 
    */
-  var confirmHireMe = function() {
+  // var confirmHireMe = function() {
 
-    // Return confirm message
-    return confirm('Are you sure?');
-  };
+  //   // Return confirm message
+  //   return confirm('Are you sure?');
+  // };
 
   /**
    * Update website version
@@ -77,10 +77,10 @@
           win.ga('send', 'event', 'button', 'click', 'hire-me-clicked');
         }
 
-        // If confirm is false, block execution
-        if (!confirmHireMe()) {
-          return false;
-        }
+        // // If confirm is false, block execution
+        // if (!confirmHireMe()) {
+        //   return false;
+        // }
       }
 
       // Check if is web protocol
