@@ -1,6 +1,6 @@
 /* jshint devel:true */
 /**
- * Utilities Rocco.me JavaScript file 
+ * Utilities Rocco.me JavaScript file
  */
 (function(win) {
 
@@ -19,8 +19,8 @@
       return;
     }
     var xmlhttp;
-    
-    // compatible with IE7+, Firefox, Chrome, Opera, Safari 
+
+    // compatible with IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
@@ -43,12 +43,12 @@
    * @param  {Function} callback [description]
    * @return {[type]}            [description]
    */
-  var simpleModal = function(msg1, msg2, type, callback) { 
+  var simpleModal = function(msg1, msg2, type, callback) {
 
     // Select default status for type
     type = type || 'alert';
-    
-    // Local vars 
+
+    // Local vars
     var modal = createEl('div'),
       wrapper = createEl('div'),
       content = createEl('div'),
@@ -70,27 +70,27 @@
         callback(hash);
       }
     };
-    
+
     // Set modal's classes
     addClass(modal, className);
     addClass(wrapper, 'modal-wrapper');
     addClass(content, 'modal-content');
     addClass(text, 'text');
-    
+
     // Set p content and append to text
     text.innerHTML = '<p class="firstLine">'+msg1+'</p>';
 
     if (msg2) {
       text.innerHTML = text.innerHTML + '<p class="secondLine">'+msg2+'</p>';
     }
-    
+
     // Append text to
     content.appendChild(text);
     wrapper.appendChild(content);
 
     // Append wrapper to
     modal.appendChild(wrapper);
-    
+
     // Add confirm html
     if (type === 'confirm') {
 
@@ -147,10 +147,10 @@
    * @param {[type]} element    [description]
    * @param {[type]} classToAdd [description]
    */
-  var addClass = function(element, classToAdd) {
+  function addClass (element, classToAdd) {
     if (!element) { return; }
     var currentClassValue = element.className;
-     
+
     if (currentClassValue.indexOf(classToAdd) === -1) {
       if ((currentClassValue === null) || (currentClassValue === '')) {
         element.className = classToAdd;
@@ -160,7 +160,7 @@
     }
 
     return element;
-  };
+  }
 
   /**
    * [removeClass description]
@@ -168,24 +168,24 @@
    * @param  {[type]} classToRemove [description]
    * @return {[type]}               [description]
    */
-  var removeClass = function(element, classToRemove) {
+  function removeClass (element, classToRemove) {
     var currentClassValue = element.className;
-     
+
     // removing a class value when there is more than one class value present
     // and the class you want to remove is not the first one
     if (currentClassValue.indexOf(' ' + classToRemove) !== -1) {
       element.className = element.className.replace(' ' + classToRemove, '');
       return;
     }
-     
+
     // removing the first class value when there is more than one class
     // value present
     if (currentClassValue.indexOf(classToRemove + ' ') !== -1) {
       element.className = element.className.replace(classToRemove + ' ', '');
       return;
     }
-     
-    // removing the first class value when there is only one class value 
+
+    // removing the first class value when there is only one class value
     // present
     if (currentClassValue.indexOf(classToRemove) !== -1) {
       element.className = element.className.replace(classToRemove, '');
@@ -193,7 +193,7 @@
     }
 
     return element;
-  };
+  }
 
   /**
    * [listenEvent description]
@@ -202,7 +202,7 @@
    * @param  {[type]} func [description]
    * @return {[type]}      [description]
    */
-  var listenEvent = function(els, evt, func) {
+  function listenEvent (els, evt, func) {
 
     var listen = function(el) {
 
@@ -210,7 +210,7 @@
         el.addEventListener(evt, func, false);
       } else if (win.attachEvent) {
         el.attachEvent(evt, func, false);
-      }      
+      }
     };
 
     if (typeof els === 'object' && els.length > 0) {
@@ -221,7 +221,7 @@
     }
 
     listen(els);
-  };
+  }
 
   /**
    * Register functions in window object

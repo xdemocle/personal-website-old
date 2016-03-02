@@ -10,6 +10,7 @@ var mainBowerFiles = require('main-bower-files');
 var exec = require('child_process').exec;
 var fs = require('fs');
 var semver = require('semver');
+var autoprefixer = require('autoprefixer');
 var pkg = (function () {
   return JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 })();
@@ -24,7 +25,7 @@ gulp.task('styles', function () {
       onError: console.error.bind(console, 'Sass error:')
     }))
     .pipe($.postcss([
-      require('autoprefixer-core')({browsers: ['last 4 versions']})
+      autoprefixer({browsers: ['last 4 versions']})
     ]))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
@@ -48,7 +49,7 @@ gulp.task('html', ['styles'], function () {
     .pipe($.if('*.css', $.csso()))
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
+    .pipe($.if('*.html', $.htmlmin({conditionals: true, loose: true})))
     .pipe(gulp.dest('dist'));
 });
 
@@ -153,25 +154,25 @@ gulp.task('gitPush', function () {
   });
 });
 
-// bump versions on package/bower/manifest 
+// bump versions on package/bower/manifest
 gulp.task('bump', function () {
 
-  // increment version 
+  // increment version
   var newVer = semver.inc(pkg.version, 'patch');
 
   pkg.version = newVer;
 
   // uses gulp-filter
-  var manifestFilter = $.filter(['manifest.json']);
+  var manifestFilter = $.filter(['**/manifest.json'], {restore: true});
   var regularJsons = $.filter(['*', '!manifest.json']);
- 
+
   return gulp.src(['./bower.json', './package.json', './app/manifest.json'])
     .pipe($.bump({
       version: newVer
     }))
     .pipe(manifestFilter)
     .pipe(gulp.dest('./app'))
-    .pipe(manifestFilter.restore())
+    .pipe(manifestFilter.restore)
     .pipe(regularJsons)
     .pipe(gulp.dest('./'));
 });
@@ -179,7 +180,7 @@ gulp.task('bump', function () {
 gulp.task('upstream', ['commitDist'], function () {
 
   // return exec('git subtree push --prefix=dist --squash upstream master');
-  
+
   var upstreamDelayed = function () {
 
     exec('git subtree push --prefix=dist upstream master', function(error, stdout, stderr){
@@ -191,7 +192,7 @@ gulp.task('upstream', ['commitDist'], function () {
         // $.util.log('Resetting ./dist temporary commit');
         // exec('git reset HEAD^');
       });
-    })    
+    })
   };
 
   setTimeout(upstreamDelayed, 1500);
