@@ -1,13 +1,13 @@
 /* jshint devel:true */
 /**
- * Main Rocco.me JavaScript file 
+ * Main Rocco.me JavaScript file
  */
 (function(win, doc, U) {
 
   'use strict';
 
   /**
-   * Do you wanna hire me? function 
+   * Do you wanna hire me? function
    */
   // var confirmHireMe = function() {
 
@@ -36,17 +36,17 @@
    */
   // var slideContainer = function(slideTo) {
   //   var container = doc.getElementById('main');
-  // 
+  //
   //   // <div class="slider-control" id="slider-control">
   //   //   <a name="slideToLeft"><<</a>
   //   //   <a name="slideToCenter">O</a>
   //   //   <a name="slideToRight">>></a>
   //   // </div>
-  // 
+  //
   //   U.removeClass(container, 'slideToLeft');
   //   U.removeClass(container, 'slideToCenter');
   //   U.removeClass(container, 'slideToRight');
-  // 
+  //
   //   if (slideTo === 'slideToLeft') {
   //     U.addClass(container, 'slideToLeft');
   //   }
@@ -59,12 +59,17 @@
   // };
 
   /**
-   * Add click event 
+   * Add click event
    */
   var addClickEvent = function(target) {
 
     // Bind clicks on links with hostname different from local one
     target.addEventListener('click', function(evt) {
+
+      // Blocks links without protocol
+      if (!evt.target.protocol) {
+        return;
+      }
 
       // Prevent default behaviour of links
       evt.preventDefault();
@@ -205,17 +210,17 @@
 
     // Reset innerHTML
     place.innerHTML = '';
-    
+
     var randomTime = function() {
       var rand = Math.floor(Math.random(1,5) * 1000 / 3);
       return rand;
     };
-    
+
     var i = 0;
     var countLetters = letters.length;
 
     var typeNext = function(){
-      
+
       if (i>=countLetters) {
         i=0;
         place.innerHTML = '';
@@ -226,17 +231,17 @@
       var rand = randomTime();
 
       if (i===countLetters-1) { rand = 30000; }
-      
+
       setTimeout(typeNext, rand);
 
       i+=1;
     };
-    
+
     // Execute the first time
     if (place.innerHTML.length > 3 || id.length > 0) {
       typeNext();
     }
-    
+
     // cursor
     if (cursor.innerHTML.length === 1) {
 
@@ -258,7 +263,7 @@
     yearsOldParse();
     allLinkTags();
     updateWebsiteSemver();
-    
+
     // Create trigger global function
     win.triggerTypewriterTerminal = function() {
       setTimeout(typewriterTerminalText, 1500);

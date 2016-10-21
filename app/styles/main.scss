@@ -1,7 +1,7 @@
 // bower:scss
 // endbower
 
-// 
+//
 // Variables
 // -----------------------------------------------
 
@@ -14,7 +14,7 @@ $font-failsafe: Helvetica, Arial, sans-serif;
 $font-core: 'Roboto', $font-failsafe;
 
 
-// 
+//
 // Imports
 // -----------------------------------------------
 
@@ -23,7 +23,7 @@ $font-core: 'Roboto', $font-failsafe;
 @import "partials/utils";
 
 
-// 
+//
 // Base
 // -----------------------------------------------
 
@@ -58,7 +58,7 @@ a {
 }
 
 
-// 
+//
 // Layout
 // -----------------------------------------------
 
@@ -142,10 +142,10 @@ a {
     display: inline-block;
     @include rem('padding', 10, 0);
   }
-  
+
   p {
     text-align: center;
-    @include rem('font-size', 12);
+    @include rem('font-size', 14);
     @include rem('line-height', 25);
     @include rem('margin', 10, 0);
     @include rem('padding', 0, 20);
@@ -153,11 +153,38 @@ a {
     &:last-child {
       @include rem('margin', 30, 0, 5, 0);
     }
-  }  
+  }
 }
 
 
-// 
+
+.removed-skill {
+  position: relative;
+  cursor: help;
+
+  &:after {
+    visibility: hidden;
+    content: "Is an important skill for your candidate search? Then I wouldn't get in touch with you!";
+    text-decoration: none;
+    padding: .3rem;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 15rem;
+    margin-bottom: 1rem;
+    margin-left: -7.5rem;
+    text-align: center;
+    background-color: #eee;
+    border: .1rem solid #aaa;
+    border-radius: .2rem;
+  }
+
+  &:hover:after {
+    visibility: visible;
+  }
+}
+
+//
 // Typography
 // -----------------------------------------------
 
@@ -215,7 +242,7 @@ h3 {
 }
 
 
-// 
+//
 // Media queries
 // -----------------------------------------------
 

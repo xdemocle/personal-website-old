@@ -18,7 +18,7 @@
   }
 
   .font2 {
-    font-style: italic;    
+    font-style: italic;
   }
 }
 
@@ -56,6 +56,10 @@
 
 .blur {
   filter: blur(2px);
+}
+
+.striked {
+  text-decoration: line-through;
 }
 
 .hide {
