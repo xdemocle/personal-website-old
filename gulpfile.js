@@ -137,12 +137,10 @@ gulp.task('default', ['clean'], function () {
 });
 
 gulp.task('semverCommit', ['bump'], function () {
-
   exec('git commit app/manifest.json bower.json package.json -m "Update semver to v'+pkg.version+'"');
 });
 
 gulp.task('commitDist', ['build'], function () {
-
   exec('git add ./dist && git commit ./dist -m "Update dist folder to v'+pkg.version+'"');
 });
 
@@ -178,8 +176,6 @@ gulp.task('bump', function () {
 });
 
 gulp.task('upstream', ['commitDist'], function () {
-
-  // return exec('git subtree push --prefix=dist --squash upstream master');
 
   var upstreamDelayed = function () {
 
