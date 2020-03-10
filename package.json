@@ -1,9 +1,9 @@
 {
   "name": "xdemocle-github-io",
   "private": true,
-  "version": "0.1.83",
+  "version": "0.1.84",
   "engines": {
-    "node": ">=0.10.0"
+    "node": "<=6.18.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.3",
