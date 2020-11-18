@@ -45,11 +45,14 @@ html {
 body {
   background: $white;
   font-family: $font-core;
-  color: $black;
+  // color: $black;
+  color: rgb(2, 167, 24);
+  font-weight: 300;
 }
 
 a {
-  color: $black;
+  // color: $black;
+  color: rgb(2, 167, 24);
 
   &:hover {
     color: $black;
@@ -125,7 +128,7 @@ a {
     margin: 0 auto;
 
     width: 100%;
-    @include rem('max-width', 647);
+    @include rem('max-width', 240);
     height: auto;
 
     transition: all .5s linear;
@@ -133,7 +136,7 @@ a {
 }
 
 .content-dmmerd {
-  margin-top: -10%;
+  margin-top: -4%;
 
   .inner {
     height: 100%;
