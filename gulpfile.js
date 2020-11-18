@@ -179,11 +179,11 @@ gulp.task('upstream', ['commitDist'], function () {
 
   var upstreamDelayed = function () {
 
-    exec('git subtree push --prefix=dist upstream master', function(error, stdout, stderr){
+    exec('git subtree push --prefix=dist upstream gh-pages', function(error, stdout, stderr){
 
       $.util.log(stderr);
 
-      exec('git push origin master', function (error, stdout, stderr) {
+      exec('git push origin gh-pages', function (error, stdout, stderr) {
 
         // $.util.log('Resetting ./dist temporary commit');
         // exec('git reset HEAD^');
